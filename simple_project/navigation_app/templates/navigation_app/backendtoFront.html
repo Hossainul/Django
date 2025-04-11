@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackEnd to the front End data show</title>
+</head>
+<body>
+    <h1>Name: {{author}}</h1>
+    <h1>Age : {{age}}</h1>
+    
+    {% comment %} if logic {% endcomment %}
+    {% if age >= 20%}
+     <h4>you are eligible for the driving license</h4>
+    {% elif age >= 10 and age <= 19 %}
+     <h4>You're not eligible for the driving license</h4>
+    {%else%}
+     <h4>you're a child,boy</h4>
+    {%endif%}
+
+    {% comment %} conditional statement {% endcomment %}
+    {%for i in courses%}
+    <h2>{{i.id}} {{i.name}} {{i.fee}}
+    {%endfor%}
+
+</body>
+</html>
