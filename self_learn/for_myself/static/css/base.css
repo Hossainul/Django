@@ -1,0 +1,15 @@
+.form_style
+{
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+.header
+{
+    color : red;
+}
+
+/* body {
+    background-color: rgb(230, 10, 10) !important;
+} */
