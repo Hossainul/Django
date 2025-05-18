@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row d-flex flex-wrap justify-content-center">
+
+ {% for val in data  %}
+   <div class="col-4 mt-2">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{val.title}}</h5>
+        <p class="card-text">{{val.content}}</p>
+        <p> Author : {{val.Author}}</p>
+        
+        <strong>Categories</strong>
+        {% for vel in val.category.all %}
+           <button class = "btn btn-primary">{{vel.name}}</button>
+        {% endfor %}
+        <br>
+        <br>
+        <a href = "{% url 'edit_post' val.id %}" class = "btn btn-warning">Edit Post</a>
+        <a href = "{% url 'delete_post' val.id %}" class = "btn btn-danger">Delete Post</a>
+      </div>
+    </div>
+  </div>
+ {% endfor %}
+  
+</div>
+
+{% endblock content %}
