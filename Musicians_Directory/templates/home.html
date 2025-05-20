@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+
+{% block title %}
+this is a home page
+{% endblock title%} 
+
+
+{% block content %}
+<h1>This is a home page</h1>
+
+<table class="table table-bordered border-primary">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Musicians Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Album Ratings</th>
+      <th scope="col">Instrument Type</th>
+      <th scope="col">Album Name</th>
+      <th scope="col">Created date and time</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for val in data %}
+    <tr>
+      <th scope="row">{{val.id}}</th>
+      <td><a class ="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" href = "{% url "edit_musicians" val.album_author.id %}">{{val.album_author.first_name}}</a></td>
+      <td>{{val.album_author.email}}</td>
+      <td>{{val.ratings}}</td>
+      <td>{{val.album_author.instrument}}</td>
+      <td>{{val.album_name}}</td>
+      <td>{{val.realse_date}}</td>
+      <td>
+        <a href="{% url 'edit_album' val.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'delete_album' val.id %}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}
