@@ -1,0 +1,30 @@
+.form_set
+{
+    width: 50%;
+    margin:auto
+}
+
+body 
+{
+    background-color: black !important;
+}
+
+label[for="id_tasktitle"] {
+    color: red;
+}
+
+label[for="id_taskdescription"] {
+    color: green;
+}
+
+label[for="id_iscomplete"] {
+    color: blue;
+}
+
+label[for="id_assigndate"] {
+    color: orange;
+}
+
+label[for = "id_name" ] {
+    color:blueviolet;
+}

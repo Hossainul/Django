@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block title %} This a homepage {% endblock title %}
+
+
+{% block content %}
+
+<div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+    
+{% for val in data %}
+  <div class = "card" style="width: 30rem">
+    <div class="card-body">
+    <h5 class="card-title">{{val.tasktitle}}</h5>
+    <p class="card-text">
+       {{val.taskdescription}}
+    </p>
+    <p class="card-text">
+       {{val.category.name}}
+    </p>
+    {% if val.iscomplete %}
+    <p class="card-text btn btn-primary">
+        completed
+    </p>
+    {% else %}
+    <a href="{% url 'edit_task' val.id %}" class=" btn btn-primary">Edit</a>
+    <a href="{% url 'delete_task' val.id %}" class=" btn btn-danger">Delete</a>
+    {% endif %}
+
+  </div>
+  </div>
+  {% endfor %} 
+</div>
+
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is a add task page
+{% endblock title %}
+
+{% block content %}
+<form method = "post" class = "form_set">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{form | crispy }}
+    <button class = "btn btn-danger">submit</button>
+</form>
+{% endblock content %}
