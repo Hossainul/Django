@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %} This is a profile page {% endblock title %}
+
+{% block content %}
+<h1>Welcome back {{user}}</h1>
+<a class = "btn btn-primary" href = "{% url 'changePass' %}">change pass</a>
+<a class = "btn btn-primary" href = "{% url 'withoutold' %}">change pass without old</a>
+<a class = "btn btn-primary" href = "{% url 'update_info' %}">Edit informations</a>
+<a class = "btn btn-primary" href = "{% url 'addPost' %}">Add Post</a>
+
+{% if messages %}
+  {% for msg in messages %}
+    <div class="toast align-items-center mx-auto my-auto show" 
+         role="alert" 
+         aria-live="assertive" 
+         aria-atomic="true"
+         data-bs-autohide="true">
+      <div class="d-flex">
+        <div class="toast-body bg-{{ msg.tags }}">
+          {{ msg }}
+        </div>
+        <button type="button" 
+                class="btn-close me-2 m-auto" 
+                data-bs-dismiss="toast" 
+                aria-label="Close"></button>
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

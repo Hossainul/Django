@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% include 'home.html' %}
+
+{% block title %}
+This is a post page
+{% endblock title %}
+
+{% block content %}
+  <div class="row text-wrap d-flex justify-content-center gap-3 text-center mt-4">
+      {% if data %}
+          {% for val in data %}
+          <div class = "col-4 bg-white">
+            <h5 class="card-title">{{val.title}}</h5>
+            <p class="card-text">{{val.description}}</p>
+            <p>Categories : </p>
+
+            {% for cat in val.category.all %}
+               <button class = "btn btn-success">{{cat.name}}</button>
+            {% endfor %}
+             <br>
+             <br>
+            <a href="{% url 'edit_post' val.id %}" class = "btn btn-primary">Edit Post</a>
+            <a href="{% url 'delete_post' val.id %}" class="btn btn-danger">Delete</a>
+          </div>
+           {% endfor %}
+        {% else %}
+           <h3>No data available !!</h3>
+      {% endif %}
+</div>
+{% endblock content %}
