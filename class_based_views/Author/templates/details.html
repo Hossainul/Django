@@ -1,0 +1,47 @@
+{% extends 'base.html' %} 
+{% block title %} This is a details page 
+{% endblock title %} 
+
+
+{% block content %}
+
+<div class="col-10">
+  <div class="card mb-3 col-5">
+    {% if author.image %}
+    <img
+      src="{{ author.image.url }}"
+      class="card-img-top"
+      alt="{{ author.title }}"
+    />
+    {% endif %}
+
+    <div class="card-body">
+      <h5 class="card-title">{{ author.title }}</h5>
+      <p class="card-text">{{ author.description }}</p>
+      {% for cat in author.category.all %}
+      <button class="btn btn-success btn-sm">{{ cat.name }}</button>
+      {% endfor %}
+    </div>
+  </div>
+  <br />
+  {% load crispy_forms_tags %}
+  <form class="form_set" method="post">
+    <h5>All Comments:</h5>
+    <ul class="list-group mb-3">
+      {% for c in comment %}
+      <li class="list-group-item">
+        <strong>{{ c.name }}</strong> ({{ c.email }})<br />
+        {{ c.comment }}<br />
+        <small>{{ c.on_create }}</small>
+      </li>
+      {% empty %}
+      <li class="list-group-item text-muted">No comments yet.</li>
+      {% endfor %}
+    </ul>
+
+    {% csrf_token %} {{ contact_form | crispy }}
+    <button class="btn btn-danger">submit</button>
+  </form>
+</div>
+
+{% endblock content %}

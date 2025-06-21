@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}This is a home page{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <!-- Sidebar with categories -->
+    <div class="col-2 bg-white">
+      <h3>All Categories :</h3>
+      {% if categories %}
+        {% for cat in categories %}
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="radioDefault"
+              id="radioDefault{{ cat.id }}" />
+            <label class="form-check-label" for="radioDefault{{ cat.id }}">
+              <a href="{% url 'category_wise_post' cat.slug %}">{{ cat.name }}</a>
+            </label>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No categories available!</p>
+      {% endif %}
+    </div>
+
+    <!-- Posts area -->
+    <div class="col-10 d-flex gap-3 flex-wrap">
+      {% if data %}
+        {% for val in data %}
+          <div class="card mb-3 col-5">
+            {% if val.image %}
+              <img src="{{ val.image.url }}" class="card-img-top " alt="{{ val.title }}" />
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title"><a class = "text-decoration-none" href = "{% url 'details' val.id %}" > {{ val.title }} </a> </h5>
+              <p class="card-text">{{ val.description|truncatewords:5 }}</p>
+              {% for cat in val.category.all %}
+                <button class="btn btn-success btn-sm">{{ cat.name }}</button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h3>No data available !!</h3>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock content %}
