@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Left Column - Profile Image -->
+        <div class="col-md-4 text-center">
+            {% if profile.image %}
+                <img src="{{ profile.image.url }}" 
+                     alt="{{ profile.user.get_full_name }}" 
+                     class="img-fluid rounded-circle mb-3" 
+                     style="width: 200px; height: 200px; object-fit: cover;">
+            {% else %}
+                <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center mb-3" 
+                     style="width: 200px; height: 200px;">
+                    <span class="text-white">No Image</span>
+                </div>
+            {% endif %}
+            
+            <h2>{{ profile.user.get_full_name }}</h2>
+            <p class="text-muted">{{ profile.user.email }}</p>
+            
+            {% comment %} <a href="{% url 'profile-update' %}" class="btn btn-primary mt-2">
+                Edit Profile
+            </a> {% endcomment %}
+        </div>
+        
+        <!-- Right Column - Profile Details -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>About Me</h4>
+                </div>
+                <div class="card-body">
+                    {% if profile.bio %}
+                        <p class="card-text">{{ profile.bio }}</p>
+                    {% else %}
+                        <p class="text-muted">No bio yet</p>
+                    {% endif %}
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Contact Information</h5>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-envelope me-2"></i> {{ profile.user.email }}</li>
+                                {% if profile.website %}
+                                    <li>
+                                        <i class="fas fa-globe me-2"></i> 
+                                        <a href="{{ profile.website }}" target="_blank">
+                                            {{ profile.website }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Account Details</h5>
+                            <ul class="list-unstyled">
+                                <li><strong>Username:</strong> {{ profile.user.username }}</li>
+                                <li><strong>Joined:</strong> {{ profile.user.date_joined|date:"F Y" }}</li>
+                                <li><strong>Status:</strong> 
+                                    {% if profile.is_musician %}
+                                        <span class="badge bg-success">Musician</span>
+                                    {% else %}
+                                        <span class="badge bg-info">Listener</span>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

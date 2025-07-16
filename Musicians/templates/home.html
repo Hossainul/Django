@@ -1,0 +1,128 @@
+{% extends "base.html" %} 
+{% load static %} 
+
+{% block title %} 
+Welcome to the musicians homepage 
+{% endblock title %} 
+
+{% block content %}
+
+<!-- navbar -->
+
+<nav
+  class="navbar navbar-expand-lg bg-body-tertiary bg-dark"
+  data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-3 btn btn-dark" href="{% url 'homepage' %}">Home</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      
+      <nav class="navbar bg-body-tertiary ms-auto">
+        <div class="container-fluid">
+          <form class="d-flex w-100" role="search" method = "get">
+            <!-- Added w-100 here -->
+            <input
+              class="form-control search_bar_design me-2 flex-grow-1"
+              type="search"
+              placeholder="Enter your favorite band name here..."
+              aria-label="Search"
+              value = "{{search_term}}"
+              name = "search"
+            />
+            <button class="btn btn-outline-success fs-3" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="navbar-nav">
+        <a
+          class="nav-link active ms-3 fs-3 btn btn-primary"
+          aria-current="page"
+          href="{% url 'login' %}">Login</a>
+        <a class="nav-link active ms-3 fs-3 btn btn-danger" href="{% url 'register' %}">Register</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- second part  -->
+
+<div class="container my-4">
+  <div class="row">
+    <div class="second_part col-7 my-auto">
+
+      <h1 class="text-danger heading">Welcome to our musicians website</h1>
+      <p class = "fs-4">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      </p>
+
+    </div>
+
+    <div class="second_part col-3">
+      <img
+        class="img_fixed"
+        src="{% static 'image/music.jpg' %}"
+        alt="Rockstar image"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container mt-5">
+
+  <!-- 🔍 Search + Filter Form -->
+  <!--<form method="get" class="row g-3 mb-4">
+   <div class="col-md-6">
+     <input type="text" name="search" class="form-control" placeholder="Search by title" value="{{ search_term }}">
+   </div>
+   <div class="col-md-2">
+     <button type="submit" class="btn btn-primary w-100">Filter</button>
+   </div>
+  </form> <!-->
+  
+  <h1 class="text-center mb-4 text-danger fs-1 mx-4">All Albums</h1>
+
+  {% if albums %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      {% for album in albums %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+
+            {% if album.image %}
+              <img src="{{ album.image.url }}" class="card-img-top" alt="{{ album.title }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+              <img src="album.image.url" class="card-img-top" alt="No image">
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{ album.title }}</h5>
+              <p class="card-text">{{ album.details|default:"No description available." }}</p>
+              <p class="text-primary mb-1"><strong>Artist:</strong> {{ album.user.first_name }}</p>
+              <p class="text-info mb-1"><strong>Instrument:</strong> {{ album.instrument_type }}</p>
+              <p class="text-success mb-1"><strong>Songs:</strong> {{ album.number_of_songs }}</p>
+              <p class="text-muted"><strong>Release:</strong> {{ album.Release_date|date:"F j, Y, g:i a" }}</p>
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+
+
+    </div>
+
+    {% endif %}
+{% endblock content %}

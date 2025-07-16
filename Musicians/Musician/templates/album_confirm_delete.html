@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is album deleted page
+{% endblock title %}
+
+{% block content %}
+
+<form method="post" class ="text-center">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {% csrf_token %}
+    <button type="submit" class = "btn btn-danger">Confirm</button>
+    <a class = "btn btn-success" href="{% url 'show_album' %}">Cancel</a>
+</form>
+
+{% endblock %}

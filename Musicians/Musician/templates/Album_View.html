@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+This is a all album showing templates
+{% endblock title %}
+
+{% block content %}
+
+{% comment %}
+coolest card code 
+{% endcomment %}
+
+<div class="container mt-5">
+  <!-- 🔍 Search + Filter Form -->
+  <form method="get" class="row g-3 mb-4">
+   <div class="col-md-6">
+     <input type="text" name="search" class="form-control" placeholder="Search by title" value="{{ search_term }}">
+   </div>
+   <div class="col-md-2">
+     <button type="submit" class="btn btn-primary w-100">Filter</button>
+   </div>
+  </form>
+  
+  <h1 class="text-center mb-4">Your Albums</h1>
+
+  {% if albums %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      {% for album in albums %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+
+            {% if album.image %}
+              <img src="{{ album.image.url }}" class="card-img-top" alt="{{ album.title }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+              <img src="album.image.url" class="card-img-top" alt="No image">
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{ album.title }}</h5>
+              <p class="card-text">{{ album.details|default:"No description available." }}</p>
+              <p class="text-primary mb-1"><strong>Artist:</strong> {{ album.user.first_name }}</p>
+              <p class="text-info mb-1"><strong>Instrument:</strong> {{ album.instrument_type }}</p>
+              <p class="text-success mb-1"><strong>Songs:</strong> {{ album.number_of_songs }}</p>
+              <p class="text-muted"><strong>Release:</strong> {{ album.Release_date|date:"F j, Y, g:i a" }}</p>
+              <a class = "btn btn-danger" href = "{% url 'delete_album' album.id %}">Delete</a>
+              <a class = "btn btn-primary" href = "{% url 'edit_album' album.id %}">Edit</a>
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+
+
+    </div>
+  {% else %}
+    <h4 class="text-center text-muted">No albums found.</h4>
+  {% endif %}
+</div>
+{% endblock content %}
