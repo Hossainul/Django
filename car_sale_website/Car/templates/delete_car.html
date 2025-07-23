@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+This is a car Delete page.
+{% endblock title %}
+
+{% block content %}
+<div class="text-center p-4">
+  <h2>Delete Confirmation</h2>
+  <p>Are you sure you want to Delete this car ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="#" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

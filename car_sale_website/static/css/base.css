@@ -1,0 +1,30 @@
+.form_set
+{
+    width: 50%;
+    margin: auto;
+}
+
+.profile-banner {
+    height: 200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+  
+  
+.profile-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 100%);
+  }
+  
+@media (max-width: 768px) {
+.profile-banner {
+      height: 150px;
+      background-position: center center !important;
+    }
+  }

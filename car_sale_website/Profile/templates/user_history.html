@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Your Purchase History</h2>
+  <p><strong>Total Cars Bought:</strong> {{ total_cars }}</p>
+  <p><strong>Total Money Spent:</strong> ${{ total_spent }}</p>
+
+  <ul class="list-group mt-4">
+    {% for order in orders %}
+      <li class="list-group-item">
+        {{ order.quantity }} × {{ order.car.car_model }} @ ${{ order.car.car_price }}
+        (Ordered on {{ order.ordered_at|date:"Y-m-d H:i" }})
+      </li>
+    {% empty %}
+      <li class="list-group-item">No orders yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

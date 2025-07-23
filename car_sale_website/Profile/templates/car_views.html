@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+All car you've been add.
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <h1 class="text-center mb-4 text-danger fs-1 mx-4">All cars</h1>
+
+  {% if cars %}
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+      {% for car in cars %}
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0">
+            {% if car.car_image %}
+              <img src="{{ car.car_image.url }}" class="card-img-top" alt="{{ car.title }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+              <img src="{% static 'image/default_car.jpg' %}" class="card-img-top" alt="No image">
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title text-danger">{{ car.car_model }}</h5>
+              <p class="card-text">{{ car.car_details|default:"No description available." }}</p>
+              <p class="text-primary mb-1"><strong>Brand:</strong> {{ car.car_brand }}</p>
+              <p class="text-info mb-1"><strong>Car quantity:</strong> {{ car.car_quantity }}</p>
+              <p class="text-success mb-1"><strong>Price:</strong> ${{ car.car_price }}</p>
+              <a href = "{% url 'car_delete' car.id %}" class = "btn btn-danger">Delete</a> 
+              <a href = "{% url 'car_edit' car.id %}" class = "btn btn-primary">Edit</a> 
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center">No cars available.</p>
+  {% endif %}
+</div>
+
+{% endblock content %}
